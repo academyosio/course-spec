@@ -11,13 +11,13 @@ commits implementing one carry the trailer `Refs: RMI-COURSESPEC-<NNN>`.
 
 **Theme:** A course directory loads into one value and is checked by one command.
 
-- [ ] `RMI-COURSESPEC-001` Go types for course, section, lesson, quiz, and published state
-- [ ] `RMI-COURSESPEC-002` Course directory loader with YAML and JSON support
+- [ ] `RMI-COURSESPEC-001` Go types for course, section, lesson, quiz, and published state, including languages, certificate, video publishing, and theme
+- [ ] `RMI-COURSESPEC-002` Course directory loader, several courses per repository, and a shared theme
   - Depends on: `RMI-COURSESPEC-001`
-- [ ] `RMI-COURSESPEC-003` HTML deck lesson discovery
+- [ ] `RMI-COURSESPEC-003` HTML deck lesson discovery and content fingerprints, covering translated narration
 - [ ] `RMI-COURSESPEC-004` Generated, embedded, and linted JSON Schema
   - Depends on: `RMI-COURSESPEC-001`
-- [ ] `RMI-COURSESPEC-005` `coursespec validate` and `coursespec lessons` with text and JSON output
+- [ ] `RMI-COURSESPEC-005` `coursespec validate` and `coursespec lessons` with text and JSON output, authoring warnings, and changed-since-published status
   - Depends on: `RMI-COURSESPEC-002`, `RMI-COURSESPEC-003`, `RMI-COURSESPEC-004`
 
 ## Phase 2 — Proven and Documented
@@ -31,7 +31,7 @@ commits implementing one carry the trailer `Refs: RMI-COURSESPEC-<NNN>`.
 - [ ] `RMI-COURSESPEC-008` MkDocs site: terms, layout, file reference, validation errors
 - [ ] `RMI-COURSESPEC-009` Guide for AI agents writing a course
   - Depends on: `RMI-COURSESPEC-007`
-- [ ] `RMI-COURSESPEC-010` v0.1.0 release
+- [ ] `RMI-COURSESPEC-010` v0.1.0 release, with the AcademyOS import and course recording specified against it
   - Depends on: `RMI-COURSESPEC-006`, `RMI-COURSESPEC-008`
 
 ## Phase 3 — More Sources and Exports
@@ -43,3 +43,4 @@ commits implementing one carry the trailer `Refs: RMI-COURSESPEC-<NNN>`.
 - [ ] `RMI-COURSESPEC-013` Published-state writer helpers for recording and platform tools
 - [ ] `RMI-COURSESPEC-014` QTI export for quizzes
 - [ ] `RMI-COURSESPEC-015` Course-level final exam
+- [ ] `RMI-COURSESPEC-016` Program manifest grouping courses into learning paths with a program certificate
