@@ -32,13 +32,15 @@ Existing standards don't fill this gap. SCORM, IMS Common Cartridge, IMS QTI, an
 6. **Stable IDs.** Every course, section, lesson, quiz, and question has an ID that does not change once published, because IDs key learner progress, video files, and platform records.
 7. **Versioned courses.** A course has a version and a change log, so a platform can tell learners what changed and whether to retake a quiz.
 8. **Any media source.** A lesson's video can come from an HTML deck, a Marp deck, or a finished video file. Authors who don't use videoascode still fit.
+9. **Several languages.** A course can be narrated and published in more than one language, with translations kept as source next to the deck.
 
 ## Non-Goals
 
 - Replacing SCORM, Common Cartridge, or QTI as exchange formats. Export to them may come later.
 - Defining how a platform stores, sells, or grades courses beyond what the course itself declares (pass mark, retakes, certificate rule).
 - Defining slide design or themes. The spec names where theme files live, not what they contain.
-- Hosting video. Published state records where a video was uploaded; uploading is a tool's job.
+- Uploading video. The course declares how its videos are published (provider, visibility, playlist); uploading is a tool's job, and published state records the result.
+- Programs and learning paths that group several courses, such as a free foundation course followed by paid specializations. `prerequisites` covers ordering in v1; a program manifest may follow.
 
 ## Users
 
@@ -69,13 +71,14 @@ Existing standards don't fill this gap. SCORM, IMS Common Cartridge, IMS QTI, an
 
 ### Course
 
-- A course directory has one course manifest: its ID, version, title, summary, description, language, audience, learning outcomes, prerequisites, access, authors, tags, thumbnail, certificate rule, change log, and ordered list of sections.
-- Course-level shared files have defined places: theme assets and pronunciations.
+- A course directory has one course manifest: its ID, version, title, summary, description, languages, audience, learning outcomes, prerequisites, access, authors, tags, thumbnail, certificate (rule, title, template), video publishing settings, change log, and ordered list of sections.
+- A course directory is any directory with a course manifest, so one repository can hold several courses.
+- Course-level shared files have defined places: pronunciations, and a theme that several courses in a repository can share.
 
 ### Section
 
 - A section has its own directory with a section manifest: ID, title, summary, its media source, optional per-lesson details, and an optional quiz.
-- A section is self-contained: its deck, narration, and quiz sit in its directory.
+- A section is self-contained: its deck, narration in every language, and quiz sit in its directory. Translated narration is committed source.
 
 ### Lesson
 
@@ -85,33 +88,42 @@ Existing standards don't fill this gap. SCORM, IMS Common Cartridge, IMS QTI, an
 
 ### Quiz
 
-- A quiz has an ID, title, pass percentage, retake rules, and whether feedback is shown.
+- A quiz has an ID, title, pass percentage, retake rules, whether feedback is shown, and whether options are shuffled.
 - Question types: multiple choice (one or more correct options), true/false, and short answer (a list of accepted answers).
-- Each question has an ID, a prompt, its answer key, an explanation, points, and optionally the lesson it covers.
+- Each question has an ID, a prompt, its answer key, an explanation, points, and optionally the lesson it covers, which may be in any section.
 
 ### Published state
 
-- One committed file records, per lesson: the content fingerprint of what was published, duration, the uploaded video per language, and captions. Per platform, it records the platform's IDs for the course, lessons, and quizzes.
+- One committed file records, per lesson: the content fingerprint of what was published, the recording tool's fingerprint, duration, the uploaded video per language, and captions. It records a fingerprint per quiz and the video playlists. Per platform, it records the platform's IDs for the course, lessons, and quizzes.
+- The content fingerprint covers only what authors write (slides and narration), so any tool can tell a lesson changed. The recording fingerprint adds the recording settings and is interpreted only by the recording tool.
 - Tools write this file; authors don't edit it.
 - Removing or renaming a published ID is a validation error unless the item is marked retired.
 
 ### Validation
 
 - A `coursespec validate <dir>` command checks a course directory against the schema and the cross-reference rules, and reports each problem with its file and a fix.
+- Warnings help authors and agents write good courses: answer keys a learner can pass by pattern, slides without narration, overlong lessons, and missing translations.
 - The same checks are a Go library, so platforms validate on import with identical rules.
 
 ### Format
 
-- Manifests may be YAML or JSON, with the same schema. YAML is recommended for hand-written files because course text is long and multi-line. Published state is always JSON.
-- Property names are camelCase.
+- Every file is JSON, which agents write reliably and one schema covers. Long text, such as a course description, goes in Markdown files the manifests point to.
+- Property names and enum values are camelCase.
 - Go types are the source of truth. The JSON Schema is generated from them and published under `https://academyos.io/schemas/course-spec/v1/`.
 
 ## Success Criteria
 
-1. A real multi-section course with decks and quizzes validates, and imports into AcademyOS with its quizzes, with no hand uploads.
-2. After a fresh clone, rebuilding and re-syncing that course updates the existing platform records instead of creating new ones.
+For v0.1.0, delivered by this repository:
+
+1. A real multi-section course with decks, translations, and quizzes validates with `coursespec validate`, which replaces that course's own checker scripts and generated manifest.
+2. After a fresh clone, `coursespec lessons` reports which lessons and quizzes changed since they were published.
 3. An AI agent given only the spec docs and an example course can write a new section that validates on the first or second try.
-4. The one-off checker scripts and generated manifests in course repositories are replaced by `coursespec validate`.
+4. The AcademyOS import and the videoascode course recording are specified against this version.
+
+When the dependent work in AcademyOS and videoascode lands:
+
+5. The same course imports into AcademyOS with its quizzes, with no hand uploads.
+6. Rebuilding and re-syncing it updates the existing platform records instead of creating new ones.
 
 ## Prior Art
 
