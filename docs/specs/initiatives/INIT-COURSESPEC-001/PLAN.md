@@ -34,8 +34,11 @@ The terms are not new. Course, section, lesson, slide, clip, and chapter are alr
 
 The import direction is deliberate: `deck` depends only on an HTML parser, while videoascode's deck package brings in browser automation. videoascode imports course-spec, never the reverse.
 
+## Decisions
+
+- **License.** MIT for the code, schemas, docs, and examples, matching the related tools. One permissive license covers everything, including the schemas embedded in code and the examples authors copy into their courses.
+
 ## Open Questions
 
 1. **Quiz placement.** Quizzes come after a section's lessons. A course-level final exam is RMI-COURSESPEC-015; since questions can already reference any lesson, it needs only a place in the manifest.
-2. **License.** MIT for the code and CC BY 4.0 for the spec text is the usual split; MIT for everything is simpler. Decide before the docs site is published (RMI-COURSESPEC-008).
-3. **QTI export.** Worth adding once a platform other than AcademyOS needs the quizzes.
+2. **QTI export.** Worth adding once a platform other than AcademyOS needs the quizzes.
