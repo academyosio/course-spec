@@ -40,5 +40,5 @@ The import direction is deliberate: `deck` depends only on an HTML parser, while
 
 ## Open Questions
 
-1. **Quiz placement.** Quizzes come after a section's lessons. A course-level final exam is RMI-COURSESPEC-015; since questions can already reference any lesson, it needs only a place in the manifest.
+1. **Quiz placement.** Quizzes come after a section's lessons, and a final assessment is a quiz-only section. RMI-COURSESPEC-015 remains for an exam that should sit outside the section list, if a course needs one.
 2. **QTI export.** Worth adding once a platform other than AcademyOS needs the quizzes.

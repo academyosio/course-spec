@@ -44,3 +44,4 @@ commits implementing one carry the trailer `Refs: RMI-COURSESPEC-<NNN>`.
 - [ ] `RMI-COURSESPEC-014` QTI export for quizzes
 - [ ] `RMI-COURSESPEC-015` Course-level final exam
 - [ ] `RMI-COURSESPEC-016` Program manifest grouping courses into learning paths with a program certificate
+- [ ] `RMI-COURSESPEC-017` Practice quizzes: a quiz `practice` flag, so only other quizzes count toward `allQuizzes` certificates
