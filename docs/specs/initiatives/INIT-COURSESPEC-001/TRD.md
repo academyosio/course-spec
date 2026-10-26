@@ -29,7 +29,7 @@ The loader reads each file's bytes and decodes them with `encoding/json` into th
   course.json               course manifest
   description.md            long course description (optional)
   published.json            published state, written by tools, committed
-  terms.json                pronunciations for narration (optional)
+  pronunciations.json       how narration says terms (optional)
   theme/                    shared deck CSS, JS, fonts (optional; see `theme`)
   assets/                   thumbnail, certificate template, course images (optional)
   sections/
@@ -203,7 +203,7 @@ The fingerprint doesn't cover the theme's CSS, JavaScript, fonts, or images, so 
 
 ## Pronunciations
 
-`terms.json` maps a term to how TTS should say it, per language. It uses the videoascode pronunciation map:
+`pronunciations.json` maps a term to how TTS should say it, per language. It uses the videoascode pronunciation map:
 
 ```json
 {
@@ -323,7 +323,7 @@ Checks:
 5. Quiz rules from the Quiz section.
 6. Every ID in `published.json` still exists or is marked `retired`. A published ID that disappeared is an error naming the likely rename.
 7. When a lesson's content fingerprint or a quiz's fingerprint differs from `published.json`, and `version` equals the published `courseVersion`, warn: content changed without a version bump.
-8. Referenced files (thumbnail, certificate template, text lessons, `terms.json`, transcripts) exist. `theme` resolves inside the repository; a path that leaves it is an error.
+8. Referenced files (thumbnail, certificate template, text lessons, `pronunciations.json`, transcripts) exist. `theme` resolves inside the repository; a path that leaves it is an error.
 9. Transcripts: a slide `id` that isn't in the deck is an error; it catches a translation left behind by a renamed or deleted slide. A deck slide with no narration in a language listed in `languages` is a warning, because recording tools record a language only when every slide has it.
 
 Warnings that help authors and agents:
