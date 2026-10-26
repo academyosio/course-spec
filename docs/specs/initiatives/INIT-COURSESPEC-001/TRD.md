@@ -206,7 +206,7 @@ Translations are in `deck/voiceover/transcript.json`, in the videoascode transcr
 
 `deck` computes a fingerprint for each lesson, written `sha256:<hex>`. For each slide in the lesson, in order, it hashes:
 
-1. the slide's HTML;
+1. the slide's HTML, without the slide element's own `data-id`, so renaming a slide isn't a content change and a renamed lesson can be recognized by its unchanged fingerprint;
 2. for each language in the course's `languages`, sorted by code, the slide's narration: from the deck for the default language, from the transcript for the others, with the segment texts joined by single spaces. A language with no narration for the slide contributes empty text.
 
 Narration is normalized before hashing: `[PAUSE:ms]` directives are removed and runs of whitespace become one space. Each value is written with its length in bytes before it, so field boundaries can't shift between slides.
