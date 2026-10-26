@@ -1,0 +1,15 @@
+# Build output
+/coursespec
+/dist/
+
+# Generated course files, which belong in each course's build/ directory
+build/
+
+# Test and coverage output
+*.out
+coverage.*
+
+# IDE and OS
+.idea/
+.vscode/
+.DS_Store
