@@ -11,13 +11,13 @@ commits implementing one carry the trailer `Refs: RMI-COURSESPEC-<NNN>`.
 
 **Theme:** A course directory loads into one value and is checked by one command.
 
-- [ ] `RMI-COURSESPEC-001` Go types for course, section, lesson, quiz, and published state, including languages, certificate, video publishing, and theme
-- [ ] `RMI-COURSESPEC-002` Course directory loader, several courses per repository, and a shared theme
+- [x] `RMI-COURSESPEC-001` Go types for course, section, lesson, quiz, and published state, including languages, certificate, video publishing, and theme
+- [x] `RMI-COURSESPEC-002` Course directory loader, several courses per repository, and a shared theme
   - Depends on: `RMI-COURSESPEC-001`
-- [ ] `RMI-COURSESPEC-003` HTML deck lesson discovery and content fingerprints, covering translated narration
-- [ ] `RMI-COURSESPEC-004` Generated, embedded, and linted JSON Schema
+- [x] `RMI-COURSESPEC-003` HTML deck lesson discovery and content fingerprints, covering translated narration
+- [x] `RMI-COURSESPEC-004` Generated, embedded, and linted JSON Schema
   - Depends on: `RMI-COURSESPEC-001`
-- [ ] `RMI-COURSESPEC-005` `coursespec validate` and `coursespec lessons` with text and JSON output, authoring warnings, and changed-since-published status
+- [x] `RMI-COURSESPEC-005` `coursespec validate` and `coursespec lessons` with text and JSON output, authoring warnings, and changed-since-published status
   - Depends on: `RMI-COURSESPEC-002`, `RMI-COURSESPEC-003`, `RMI-COURSESPEC-004`
 
 ## Phase 2 — Proven and Documented
