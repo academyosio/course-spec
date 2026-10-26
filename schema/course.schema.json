@@ -1,0 +1,250 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academyos.io/schemas/course-spec/v1/course.schema.json",
+  "$defs": {
+    "Author": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "name"
+      ]
+    },
+    "Certificate": {
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "requires": {
+          "type": "string",
+          "enum": [
+            "allQuizzes",
+            "allLessons",
+            "allLessonsAndQuizzes"
+          ],
+          "description": "Requires is allQuizzes, allLessons, or allLessonsAndQuizzes."
+        },
+        "title": {
+          "type": "string",
+          "description": "Title defaults to the course title."
+        },
+        "template": {
+          "type": "string",
+          "description": "Template defaults to the platform's template."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "enabled"
+      ],
+      "description": "Certificate describes the certificate a learner earns."
+    },
+    "Change": {
+      "properties": {
+        "version": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        },
+        "retakeQuizzes": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "RetakeQuizzes names quizzes whose earlier passes are out of date."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "version"
+      ],
+      "description": "Change is one entry in a course's change log."
+    },
+    "SectionRef": {
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Path is the section directory, relative to the course directory."
+        },
+        "released": {
+          "type": "boolean",
+          "description": "Released is false for a planned section that isn't published yet.\nAbsent means released."
+        },
+        "id": {
+          "type": "string",
+          "description": "ID and Title name an unreleased section, whose directory may be\nmissing."
+        },
+        "title": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "path"
+      ],
+      "description": "SectionRef is one entry in a course's section list."
+    },
+    "VideoPublish": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "enum": [
+            "youtube",
+            "vimeo"
+          ],
+          "description": "Provider is youtube or vimeo."
+        },
+        "visibility": {
+          "type": "string",
+          "enum": [
+            "public",
+            "unlisted",
+            "private"
+          ],
+          "description": "Visibility is public, unlisted, or private."
+        },
+        "playlist": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "Playlist is each language's playlist title."
+        },
+        "descriptionFooter": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object",
+          "description": "DescriptionFooter is appended to each video's description, by language."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "provider"
+      ],
+      "description": "VideoPublish records how a course's videos are published."
+    }
+  },
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "pattern": "^1(\\.[0-9]+)?$",
+      "description": "SpecVersion selects the format version, such as \"1\"."
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "ID is the course's stable kebab-case ID."
+    },
+    "version": {
+      "type": "string",
+      "description": "Version is the course's semantic version."
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description is a short Markdown description. Set it or DescriptionFile."
+    },
+    "descriptionFile": {
+      "type": "string",
+      "description": "DescriptionFile is a Markdown file holding a long description."
+    },
+    "languages": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "description": "Languages lists the languages the course is published in; the first is\nthe default. Empty means en-US only."
+    },
+    "audience": {
+      "type": "string"
+    },
+    "outcomes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "prerequisites": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "access": {
+      "type": "string",
+      "enum": [
+        "open",
+        "invite",
+        "paid"
+      ],
+      "description": "Access is open, invite, or paid."
+    },
+    "tags": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "authors": {
+      "items": {
+        "$ref": "#/$defs/Author"
+      },
+      "type": "array"
+    },
+    "thumbnail": {
+      "type": "string"
+    },
+    "theme": {
+      "type": "string",
+      "description": "Theme is a directory of shared deck files, inside the same repository."
+    },
+    "certificate": {
+      "$ref": "#/$defs/Certificate"
+    },
+    "video": {
+      "$ref": "#/$defs/VideoPublish"
+    },
+    "sections": {
+      "items": {
+        "$ref": "#/$defs/SectionRef"
+      },
+      "type": "array",
+      "description": "Sections lists the course's sections in order."
+    },
+    "changes": {
+      "items": {
+        "$ref": "#/$defs/Change"
+      },
+      "type": "array"
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "specVersion",
+    "id",
+    "version",
+    "title",
+    "sections"
+  ],
+  "title": "course-spec course manifest",
+  "description": "CourseManifest is a course's course.json."
+}

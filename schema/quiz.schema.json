@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academyos.io/schemas/course-spec/v1/quiz.schema.json",
+  "$defs": {
+    "Option": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        },
+        "correct": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "text",
+        "correct"
+      ],
+      "description": "Option is one choice in a multiple-choice question."
+    },
+    "Question": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "multipleChoice",
+            "trueFalse",
+            "shortAnswer"
+          ],
+          "description": "Type is multipleChoice, trueFalse, or shortAnswer."
+        },
+        "lesson": {
+          "type": "string",
+          "description": "Lesson names the lesson the question covers, in any section."
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "options": {
+          "items": {
+            "$ref": "#/$defs/Option"
+          },
+          "type": "array",
+          "description": "Options are a multiple-choice question's choices."
+        },
+        "correctAnswer": {
+          "type": "boolean",
+          "description": "CorrectAnswer is a true/false question's answer."
+        },
+        "acceptedAnswers": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "AcceptedAnswers are a short-answer question's answers, compared\nignoring case and repeated spaces."
+        },
+        "explanation": {
+          "type": "string",
+          "description": "Explanation says why the answer is right. It is required."
+        },
+        "points": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Points defaults to 1."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "prompt",
+        "explanation"
+      ],
+      "description": "Question is one quiz question."
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "passPercentage": {
+      "type": "integer",
+      "maximum": 100,
+      "minimum": 0
+    },
+    "allowRetry": {
+      "type": "boolean"
+    },
+    "maxAttempts": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "MaxAttempts of 0 means unlimited."
+    },
+    "showFeedback": {
+      "type": "boolean"
+    },
+    "shuffleOptions": {
+      "type": "boolean",
+      "description": "ShuffleOptions asks the platform to shuffle multiple-choice options."
+    },
+    "questions": {
+      "items": {
+        "$ref": "#/$defs/Question"
+      },
+      "type": "array"
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "passPercentage",
+    "questions"
+  ],
+  "title": "course-spec quiz",
+  "description": "Quiz is a section's quiz with its answer key."
+}

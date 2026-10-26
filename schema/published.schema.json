@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academyos.io/schemas/course-spec/v1/published.schema.json",
+  "$defs": {
+    "CaptionsRef": {
+      "properties": {
+        "provider": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "provider"
+      ],
+      "description": "CaptionsRef records where captions were published."
+    },
+    "PublishedLesson": {
+      "properties": {
+        "contentFingerprint": {
+          "type": "string",
+          "description": "ContentFingerprint is the content fingerprint the video was made from."
+        },
+        "recordingFingerprint": {
+          "type": "string",
+          "description": "RecordingFingerprint is the recording tool's own, opaque fingerprint."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "videos": {
+          "additionalProperties": {
+            "$ref": "#/$defs/VideoRef"
+          },
+          "type": "object"
+        },
+        "captions": {
+          "additionalProperties": {
+            "$ref": "#/$defs/CaptionsRef"
+          },
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "PublishedLesson records what was published for one lesson."
+    },
+    "PublishedPlatform": {
+      "properties": {
+        "baseUrl": {
+          "type": "string"
+        },
+        "courseId": {
+          "type": "string"
+        },
+        "lessons": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "quizzes": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "PublishedPlatform records one platform's IDs for the course."
+    },
+    "PublishedQuiz": {
+      "properties": {
+        "fingerprint": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "PublishedQuiz records a published quiz."
+    },
+    "PublishedVideo": {
+      "properties": {
+        "playlists": {
+          "additionalProperties": {
+            "$ref": "#/$defs/VideoRef"
+          },
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "PublishedVideo records course-level video publishing."
+    },
+    "VideoRef": {
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "provider",
+        "id"
+      ],
+      "description": "VideoRef names an uploaded video."
+    }
+  },
+  "properties": {
+    "courseVersion": {
+      "type": "string"
+    },
+    "lessons": {
+      "additionalProperties": {
+        "$ref": "#/$defs/PublishedLesson"
+      },
+      "type": "object"
+    },
+    "quizzes": {
+      "additionalProperties": {
+        "$ref": "#/$defs/PublishedQuiz"
+      },
+      "type": "object"
+    },
+    "video": {
+      "$ref": "#/$defs/PublishedVideo"
+    },
+    "platforms": {
+      "additionalProperties": {
+        "$ref": "#/$defs/PublishedPlatform"
+      },
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "title": "course-spec published state",
+  "description": "Published is a course's published.json, written by tools after recording, uploading, or syncing."
+}

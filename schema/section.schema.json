@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academyos.io/schemas/course-spec/v1/section.schema.json",
+  "$defs": {
+    "LessonEntry": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title is required when the lesson isn't discovered from a deck, and\noverrides a discovered title."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "video",
+            "text"
+          ],
+          "description": "Type is video or text."
+        },
+        "content": {
+          "type": "string",
+          "description": "Content is a Markdown file for a text lesson."
+        },
+        "objectives": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "free": {
+          "type": "boolean"
+        },
+        "estimatedMinutes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "after": {
+          "type": "string",
+          "description": "After places a text lesson after the named lesson."
+        },
+        "file": {
+          "type": "string",
+          "description": "File is a video file for a video source, not committed."
+        },
+        "retired": {
+          "type": "boolean",
+          "description": "Retired keeps a published ID that new learners don't see."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "description": "LessonEntry describes a lesson in a section manifest."
+    },
+    "Source": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "htmlDeck",
+            "marp",
+            "video",
+            "none"
+          ],
+          "description": "Type is htmlDeck, marp, video, or none."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path is the deck file, relative to the section directory."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "description": "Source is where a section's lessons and video come from."
+    }
+  },
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    },
+    "lessons": {
+      "items": {
+        "$ref": "#/$defs/LessonEntry"
+      },
+      "type": "array",
+      "description": "Lessons adds details to discovered lessons by ID, or lists lessons for\nsources that don't define them."
+    },
+    "quiz": {
+      "type": "string",
+      "description": "Quiz is the quiz file; it defaults to quiz.json when that exists."
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "source"
+  ],
+  "title": "course-spec section manifest",
+  "description": "SectionManifest is a section's section.json."
+}
