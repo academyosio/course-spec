@@ -312,13 +312,15 @@ Terms match case-insensitively at word boundaries. Only the TTS input changes; c
       "baseUrl": "https://app.academyos.io",
       "courseId": "…",
       "lessons": {"resources": "…"},
-      "quizzes": {"designing-endpoints-quiz": "…"}
+      "quizzes": {"designing-endpoints-quiz": "…"},
+      "revision": 4
     }
   }
 }
 ```
 
 - Keys are spec IDs. Platform IDs are values, so one course can be published to several platforms.
+- A platform's `revision` is its revision of the course when this copy was last synced, so the platform can refuse a push from a stale copy.
 - `contentFingerprint` is the `deck` content fingerprint the video was made from. `coursespec lessons` compares it with the current content to report a lesson as **changed**, even after a fresh clone when `build/` is empty.
 - `recordingFingerprint` is the recording tool's own fingerprint, an opaque string in whatever format that tool uses. The `sha256:` form applies only to course-spec's content and quiz fingerprints. When only it differs (a new voice, say), the recording tool reports the lesson as needing a re-record; course-spec doesn't interpret it.
 - `quizzes[].fingerprint` hashes a quiz's questions and settings, so a changed quiz is noticed the same way.
