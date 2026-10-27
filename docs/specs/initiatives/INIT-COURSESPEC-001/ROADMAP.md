@@ -28,11 +28,10 @@ commits implementing one carry the trailer `Refs: RMI-COURSESPEC-<NNN>`.
   - Depends on: `RMI-COURSESPEC-005`
 - [ ] `RMI-COURSESPEC-007` Example course covering every source type and question type
   - Depends on: `RMI-COURSESPEC-005`
-- [ ] `RMI-COURSESPEC-008` MkDocs site: terms, layout, file reference, validation errors
-- [ ] `RMI-COURSESPEC-009` Guide for AI agents writing a course
-  - Depends on: `RMI-COURSESPEC-007`
+- [x] `RMI-COURSESPEC-008` MkDocs site: terms, layout, file reference, validation errors
+- [x] `RMI-COURSESPEC-009` Guide for AI agents writing a course
 - [ ] `RMI-COURSESPEC-010` v0.1.0 release, with the AcademyOS import and course recording specified against it
-  - Depends on: `RMI-COURSESPEC-006`, `RMI-COURSESPEC-008`
+  - Depends on: `RMI-COURSESPEC-005`, `RMI-COURSESPEC-008`
 
 ## Phase 3 — More Sources and Exports
 
