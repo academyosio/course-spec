@@ -22,7 +22,7 @@ The terms are not new. Course, section, lesson, slide, clip, and chapter are alr
 
 6. **Example course.** A small course in `examples/` covering every source type and question type, used by tests and docs.
 7. **Docs site.** MkDocs: terms, layout, each file's reference, validation errors, and a guide for AI agents writing a course.
-8. **Release v0.1.0.**
+8. **Release v0.1.0** once the validator and docs are done, so platforms can depend on a published module; porting a real course follows, and what it finds goes into later minor releases.
 
 ## Dependent Work in Other Projects
 

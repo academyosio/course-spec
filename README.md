@@ -1,6 +1,6 @@
 # course-spec
 
-![coverage](https://img.shields.io/badge/coverage-80.7%25-green)
+![coverage](https://img.shields.io/badge/coverage-80.6%25-green)
 
 An open format for keeping a complete online course in one directory under
 version control: the outline, HTML slide decks with narration, translations,
@@ -97,6 +97,15 @@ report := c.Status()                                       // lessons and quizze
 
 The Go types are the source of truth. After changing them, regenerate the
 schemas with `go generate ./schema`.
+
+## Documentation
+
+Guides for the format, validation, AI agents, and the Go library are in
+[`docs/`](docs/index.md), a MkDocs site: `pip install mkdocs-material`, then
+`mkdocs serve`. Start with [Getting started](docs/guides/getting-started.md).
+
+Changes are in [CHANGELOG.md](CHANGELOG.md), generated from `CHANGELOG.json`,
+and release notes in [`docs/releases/`](docs/releases/).
 
 ## Specification
 

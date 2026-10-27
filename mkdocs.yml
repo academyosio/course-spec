@@ -1,0 +1,43 @@
+site_name: course-spec
+site_description: An open format for keeping a complete online course in one directory under version control
+repo_url: https://github.com/academyosio/course-spec
+edit_uri: edit/main/docs/
+copyright: MIT License
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Guides:
+      - Getting started: guides/getting-started.md
+      - The course directory: guides/course-directory.md
+      - Decks and narration: guides/decks-and-narration.md
+      - Quizzes: guides/quizzes.md
+      - Published state and fingerprints: guides/published-state.md
+      - Validating a course: guides/validating.md
+      - Writing a course with an AI agent: guides/ai-agents.md
+      - Using the Go library: guides/library.md
+  - Reference:
+      - Validation findings: reference/findings.md
+      - JSON Schemas: reference/schemas.md
+  - Releases:
+      - v0.1.0: releases/v0.1.0.md
+  - Specification:
+      - Requirements: specs/initiatives/INIT-COURSESPEC-001/PRD.md
+      - Design: specs/initiatives/INIT-COURSESPEC-001/TRD.md
+      - Plan: specs/initiatives/INIT-COURSESPEC-001/PLAN.md
+      - Roadmap: specs/initiatives/INIT-COURSESPEC-001/ROADMAP.md
