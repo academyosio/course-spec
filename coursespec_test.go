@@ -140,3 +140,18 @@ func TestQuestionPointsDefault(t *testing.T) {
 		t.Error("PointsOrDefault")
 	}
 }
+
+func TestWritePublished(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "published.json")
+	in := &coursespec.Published{Platforms: map[string]coursespec.PublishedPlatform{"academyos": {CourseID: "c1", Revision: 3}}}
+	if err := coursespec.WritePublished(path, in); err != nil {
+		t.Fatal(err)
+	}
+	out, err := coursespec.ReadPublished(path)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if out.Platforms["academyos"].Revision != 3 {
+		t.Errorf("revision = %d", out.Platforms["academyos"].Revision)
+	}
+}
