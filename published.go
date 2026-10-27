@@ -1,5 +1,11 @@
 package coursespec
 
+import (
+	"encoding/json"
+	"fmt"
+	"os"
+)
+
 // Published is a course's published.json, written by tools after
 // recording, uploading, or syncing. Keys are course-spec IDs.
 type Published struct {
@@ -48,4 +54,16 @@ type PublishedPlatform struct {
 	CourseID string            `json:"courseId,omitempty"`
 	Lessons  map[string]string `json:"lessons,omitempty"`
 	Quizzes  map[string]string `json:"quizzes,omitempty"`
+	// Revision is the platform's revision of the course when this copy was
+	// last synced, so the platform can refuse a push from a stale copy.
+	Revision int `json:"revision,omitempty" jsonschema:"minimum=0"`
+}
+
+// WritePublished writes p to path as indented JSON, the form tools commit.
+func WritePublished(path string, p *Published) error {
+	data, err := json.MarshalIndent(p, "", "  ")
+	if err != nil {
+		return fmt.Errorf("encode published state: %w", err)
+	}
+	return os.WriteFile(path, append(data, '\n'), 0o600)
 }

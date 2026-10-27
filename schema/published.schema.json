@@ -65,6 +65,11 @@
             "type": "string"
           },
           "type": "object"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Revision is the platform's revision of the course when this copy was\nlast synced, so the platform can refuse a push from a stale copy."
         }
       },
       "additionalProperties": false,
