@@ -1,0 +1,105 @@
+{
+  "irVersion": "1.0",
+  "project": "course-spec",
+  "repository": "https://github.com/academyosio/course-spec",
+  "versioning": "semver",
+  "commitConvention": "conventional",
+  "maintainers": [
+    "grokify",
+    "johncwang@gmail.com"
+  ],
+  "releases": [
+    {
+      "version": "v0.1.0",
+      "date": "2026-10-27",
+      "highlights": [
+        {
+          "description": "One directory per course: course.json, a section.json per section, HTML decks with narration, translations, pronunciations, quizzes with answer keys, and published state, all JSON with camelCase properties"
+        },
+        {
+          "description": "Lessons discovered from decks: a slide with `data-lesson` starts a lesson and its `data-id` is the lesson's stable ID, in videoascode's deck conventions",
+          "commit": "a7c8123"
+        },
+        {
+          "description": "`coursespec validate` reports every problem with its file, location, code, and fix, as text or JSON, for one course or every course beneath a directory",
+          "commit": "c767c7d"
+        },
+        {
+          "description": "Content fingerprints of each lesson's slides and narration in every language, so `coursespec lessons` reports what changed since it was published, even in a fresh clone",
+          "commit": "a7c8123"
+        }
+      ],
+      "added": [
+        {
+          "description": "Go types for the course and section manifests, lessons, quizzes, pronunciations, and published state",
+          "commit": "6540591",
+          "rmis": ["RMI-COURSESPEC-001"]
+        },
+        {
+          "description": "`deck` package: slides, lessons, narration with `[PAUSE:ms]` directives, the files a deck loads, transcript matching by slide ID or position, and content fingerprints",
+          "commit": "a7c8123",
+          "rmis": ["RMI-COURSESPEC-003"]
+        },
+        {
+          "description": "`coursespec.Load` resolves a course directory into one value with strict decoding, lessons discovered from decks, translations, quizzes, pronunciations, and published state; `coursespec.Find` lists every course beneath a directory; planned sections load without their files",
+          "commit": "13f47b4",
+          "rmis": ["RMI-COURSESPEC-002"]
+        },
+        {
+          "description": "Generated, embedded, and linted JSON Schemas for course.json, section.json, quiz.json, and published.json",
+          "commit": "c3e84d9",
+          "rmis": ["RMI-COURSESPEC-004"]
+        },
+        {
+          "description": "`validate` package: schema, ID, section, deck, transcript, quiz, change-log, and published-state checks, with warnings for unnarrated slides, long lessons, remote deck files, missing translations, answer patterns, and unversioned changes; publish status for each lesson and quiz",
+          "commit": "c767c7d",
+          "rmis": ["RMI-COURSESPEC-005"]
+        },
+        {
+          "description": "`coursespec` command: `validate`, `lessons`, and `schema`, with text and JSON output",
+          "commit": "3b22177",
+          "rmis": ["RMI-COURSESPEC-005"]
+        },
+        {
+          "description": "A platform `revision` in published state and `coursespec.WritePublished`",
+          "commit": "dd050c0",
+          "rmis": ["RMI-COURSESPEC-013"]
+        }
+      ],
+      "documentation": [
+        {
+          "description": "Requirements, design, plan, and roadmap for the format, including quiz-only and planned sections, self-contained decks, and fingerprints that ignore a slide's own ID",
+          "commit": "df67266"
+        },
+        {
+          "description": "README",
+          "commit": "6b7d91a"
+        },
+        {
+          "description": "Documentation site with guides for the course directory, decks and narration, quizzes, published state, validation, AI agents, and the Go library, plus the findings and schema references",
+          "rmis": ["RMI-COURSESPEC-008", "RMI-COURSESPEC-009"]
+        },
+        {
+          "description": "v0.1.0 release notes",
+          "rmis": ["RMI-COURSESPEC-010"]
+        }
+      ],
+      "tests": [
+        {
+          "description": "Decks, loading, every validation rule against a test course, schema freshness, and the CLI",
+          "commit": "dfb6b8e"
+        },
+        {
+          "description": "Published state with a platform revision",
+          "commit": "accaaf2"
+        }
+      ],
+      "dependencies": [
+        {
+          "description": "golang.org/x/net v0.61.0, github.com/spf13/cobra v1.10.2, and github.com/invopop/jsonschema v0.14.0 for schema generation",
+          "commit": "f9fd687"
+        }
+      ]
+    }
+  ]
+}
