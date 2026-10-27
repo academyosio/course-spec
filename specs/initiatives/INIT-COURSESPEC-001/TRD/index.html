@@ -1,0 +1,1814 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="An open format for keeping a complete online course in one directory under version control">
+      
+      
+      
+      
+        <link rel="prev" href="../PRD/">
+      
+      
+        <link rel="next" href="../PLAN/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Design - course-spec</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#course-spec-technical-requirements" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="course-spec" class="md-header__button md-logo" aria-label="course-spec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            course-spec
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Design
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/academyosio/course-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="course-spec" class="md-nav__button md-logo" aria-label="course-spec" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    course-spec
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/academyosio/course-spec" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/course-directory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    The course directory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/decks-and-narration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decks and narration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/quizzes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quizzes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/published-state/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Published state and fingerprints
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/validating/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validating a course
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/ai-agents/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Writing a course with an AI agent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../guides/library/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Using the Go library
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../reference/findings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Validation findings
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../reference/schemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON Schemas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Releases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../releases/v0.1.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.1.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Specification
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Specification
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PRD/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Requirements
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory Layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#course-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Course Manifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section Manifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#html-deck-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTML Deck Conventions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HTML Deck Conventions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#translations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Translations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-fingerprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Fingerprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pronunciations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pronunciations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quiz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#published-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Published State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academyos-course-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AcademyOS Course Sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../PLAN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Module
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#file-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        File Format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#directory-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory Layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#course-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Course Manifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-manifest" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Section Manifest
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#html-deck-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HTML Deck Conventions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HTML Deck Conventions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#translations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Translations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-fingerprint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Content Fingerprint
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pronunciations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pronunciations
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quiz" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quiz
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#published-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Published State
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#json-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JSON Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CLI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#academyos-course-sync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AcademyOS Course Sync
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="course-spec-technical-requirements">course-spec: Technical Requirements<a class="headerlink" href="#course-spec-technical-requirements" title="Permanent link">&para;</a></h1>
+<h2 id="module">Module<a class="headerlink" href="#module" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Module path: <code>github.com/academyosio/course-spec</code></li>
+<li>Go package: <code>coursespec</code> at the module root, holding the types and the loader.</li>
+<li>Subpackages:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>coursespec</code></td>
+<td>Types for every file, and <code>Load(dir)</code> which resolves a course directory into one <code>Course</code> value</td>
+</tr>
+<tr>
+<td><code>validate</code></td>
+<td>Schema and cross-reference checks, returning findings with file, path, message, and fix</td>
+</tr>
+<tr>
+<td><code>deck</code></td>
+<td>Discovers slides and lessons in an HTML deck (<code>data-id</code>, <code>data-lesson</code>, <code>data-vo</code>) and computes each lesson's content fingerprint</td>
+</tr>
+<tr>
+<td><code>schema</code></td>
+<td>Generated JSON Schema files, embedded with <code>//go:embed</code></td>
+</tr>
+<tr>
+<td><code>cmd/coursespec</code></td>
+<td>Cobra CLI: <code>validate</code>, <code>lessons</code>, <code>schema</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Dependencies are kept small so platforms can import the module: <code>invopop/jsonschema</code> (generation only) and <code>golang.org/x/net/html</code> for deck parsing. Recording tools import <code>deck</code> for lesson discovery, not the other way round, so this module never pulls in browser automation.</li>
+</ul>
+<h2 id="file-format">File Format<a class="headerlink" href="#file-format" title="Permanent link">&para;</a></h2>
+<p>Every file is JSON with camelCase property names and camelCase enum values. JSON is the one format: agents write it reliably, there is no indentation or implicit typing to get wrong, and one decoder and one schema cover every file. Long text goes in Markdown files that manifests point to, such as <code>descriptionFile</code> and text lessons, rather than in long JSON strings.</p>
+<p>The loader reads each file's bytes and decodes them with <code>encoding/json</code> into the Go types, rejecting unknown properties. Decoding is kept in one function so another input syntax could be added later by converting it to JSON first, without changing the types, the schema, or the validator.</p>
+<h2 id="directory-layout">Directory Layout<a class="headerlink" href="#directory-layout" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>&lt;course&gt;/
+  course.json               course manifest
+  description.md            long course description (optional)
+  published.json            published state, written by tools, committed
+  pronunciations.json       how narration says terms (optional)
+  theme/                    shared deck CSS, JS, fonts (optional; see `theme`)
+  assets/                   thumbnail, certificate template, course images (optional)
+  sections/
+    01-&lt;slug&gt;/
+      section.json          section manifest
+      deck/index.html       media source: slides with narration
+      deck/voiceover/transcript.json   narration in every language (optional, committed)
+      quiz.json             quiz with answer key (optional)
+      text/*.md             text lessons (optional)
+      build/                generated: clips, videos, captions, lessons.json (not committed)
+</code></pre></div>
+<p>A course directory is any directory that contains a course manifest. It need not be the repository root, so one repository can hold several courses:</p>
+<div class="highlight"><pre><span></span><code>courses/
+  shared/theme/
+  intro-course/course.json
+  advanced-course/course.json
+</code></pre></div>
+<p>Rules:</p>
+<ul>
+<li>Section directories are listed in the course manifest in order. A directory under <code>sections/</code> that the manifest doesn't list is an error, so a forgotten section can't go unnoticed.</li>
+<li>A section listed as not yet released may have no directory; see Course Manifest.</li>
+<li>The <code>NN-</code> prefix is for people browsing the tree; order comes from the manifest. IDs come from the manifests, not from directory names.</li>
+<li><code>build/</code> holds generated files only and belongs in <code>.gitignore</code>.</li>
+</ul>
+<h2 id="course-manifest">Course Manifest<a class="headerlink" href="#course-manifest" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;specVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;building-web-apis&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Building Web APIs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Design, build, and operate an HTTP API.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;descriptionFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;description.md&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;languages&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;es-ES&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;audience&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Backend developers who have built a web app.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;outcomes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Design resource-oriented endpoints&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Return errors clients can act on&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;prerequisites&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="nt">&quot;access&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;open&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tags&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;apis&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;http&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;authors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Jane Author&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com&quot;</span><span class="p">}],</span>
+<span class="w">  </span><span class="nt">&quot;thumbnail&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/thumbnail.png&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;theme&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;../shared/theme&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;certificate&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;requires&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;allQuizzes&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;API Designer&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;template&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;assets/certificate.html&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;video&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;youtube&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;visibility&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;public&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;playlist&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Building Web APIs&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;es-ES&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Creación de APIs web&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;descriptionFooter&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Take the full course with quizzes and a certificate: https://example.com/courses/building-web-apis&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;es-ES&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Haz el curso completo con cuestionarios y certificado: https://example.com/es/courses/building-web-apis&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;sections&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sections/01-designing-endpoints&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sections/02-handling-errors&quot;</span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sections/03-versioning&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;released&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;versioning&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Versioning&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;changes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Rewrote the pagination lesson.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;retakeQuizzes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;designing-endpoints-quiz&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>specVersion</code> is required and selects the schema. A loader refuses a major version it doesn't know.</li>
+<li><code>version</code> is semantic: major for restructuring, minor for new or rewritten lessons, patch for corrections.</li>
+<li><code>description</code> holds a short Markdown description inline; <code>descriptionFile</code> points to a Markdown file for a long one. Set one, not both.</li>
+<li><code>languages</code> lists the languages the course is published in; the first is the default.</li>
+<li><code>prerequisites</code> lists course IDs.</li>
+<li><code>access</code> is <code>open</code>, <code>invite</code>, or <code>paid</code>.</li>
+<li><code>theme</code> is a path to a directory inside the same repository, defaulting to <code>theme/</code> in the course directory. It lets several courses share one theme without copies.</li>
+<li><code>certificate.requires</code> is <code>allQuizzes</code>, <code>allLessons</code>, or <code>allLessonsAndQuizzes</code>. <code>title</code> defaults to the course title; <code>template</code> defaults to the platform's template.</li>
+<li><code>video</code> is read by upload tools: <code>provider</code> is <code>youtube</code> or <code>vimeo</code>, and <code>visibility</code> is <code>public</code>, <code>unlisted</code>, or <code>private</code>. <code>playlist</code> and <code>descriptionFooter</code> are keyed by language, because each language gets its own playlist; a language without an entry has no playlist or footer. The spec records how videos are published; uploading is the tool's job.</li>
+<li><code>changes[].retakeQuizzes</code> names quizzes whose earlier passes a platform should treat as out of date.</li>
+<li><code>sections</code> lists each section as an object with its <code>path</code>. Every entry is an object, so the schema has no union type.</li>
+<li>A section with <code>"released": false</code> is planned but not published, so a course can show its whole outline while it is released a section at a time. It carries its own <code>id</code> and <code>title</code>, and its directory may be missing or incomplete. Validation checks only that its ID is unique and kebab-case. A platform shows it as coming soon, without lessons or a quiz, and issues no certificates while any section is unreleased, even when <code>certificate.enabled</code> is true.</li>
+</ul>
+<h2 id="section-manifest">Section Manifest<a class="headerlink" href="#section-manifest" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;designing-endpoints&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Designing Endpoints&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;summary&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Resources, methods, and status codes.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;htmlDeck&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;path&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;deck/index.html&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;lessons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;resources&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;objectives&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;Model a domain as resources&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;free&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;quiz&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;quiz.json&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>lessons</code> adds details to discovered lessons by ID, or lists lessons for sources that don't define them.</li>
+<li><code>quiz</code> defaults to <code>quiz.json</code> when that file exists.</li>
+<li>A section has at least one lesson or a quiz. A section with <code>source.type</code> <code>none</code>, no lessons, and a quiz is a quiz-only section, used for a final assessment: its questions may point at lessons in any section, and a platform shows it as one quiz after the previous section. On AcademyOS, where a quiz belongs to a lesson, the import creates one quiz lesson for it.</li>
+</ul>
+<p>Sources:</p>
+<table>
+<thead>
+<tr>
+<th><code>source.type</code></th>
+<th>Lessons come from</th>
+<th>Video comes from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>htmlDeck</code></td>
+<td>Slides with <code>data-lesson</code>; the lesson ID is the starting slide's <code>data-id</code></td>
+<td>Recorded from the deck</td>
+</tr>
+<tr>
+<td><code>marp</code></td>
+<td>Slides marked as lesson starts (convention defined when supported)</td>
+<td>Recorded from the deck</td>
+</tr>
+<tr>
+<td><code>video</code></td>
+<td><code>lessons[]</code>, each with <code>file</code> (relative path, not committed) or an already-published video</td>
+<td>The file</td>
+</tr>
+<tr>
+<td><code>none</code></td>
+<td><code>lessons[]</code>, text lessons only, or none in a quiz-only section</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><code>marp</code> and <code>video</code> are reserved for Phase 3; until then the validator reports them as not yet supported.</p>
+<p>In an <code>htmlDeck</code> section, a <code>lessons[]</code> entry with <code>type</code> <code>text</code> is a text lesson placed after the lesson named by <code>after</code>, or at the end of the section without it.</p>
+<p>Lesson fields:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>Required. Unique within the course</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>Required when not discovered; overrides a discovered title</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td><code>video</code> (default with a media source) or <code>text</code></td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>Path to a Markdown file, for text lessons, such as <code>text/glossary.md</code></td>
+</tr>
+<tr>
+<td><code>objectives</code></td>
+<td>Learning objectives</td>
+</tr>
+<tr>
+<td><code>free</code></td>
+<td>Free preview</td>
+</tr>
+<tr>
+<td><code>estimatedMinutes</code></td>
+<td>Used until a recording gives the real duration</td>
+</tr>
+<tr>
+<td><code>after</code></td>
+<td>For a text lesson, the ID of the lesson it follows</td>
+</tr>
+<tr>
+<td><code>retired</code></td>
+<td>Kept to preserve a published ID; not shown to new learners</td>
+</tr>
+</tbody>
+</table>
+<p>An entry in <code>lessons[]</code> that isn't a text lesson and whose ID the deck doesn't contain is an error, so a renamed slide is caught.</p>
+<h2 id="html-deck-conventions">HTML Deck Conventions<a class="headerlink" href="#html-deck-conventions" title="Permanent link">&para;</a></h2>
+<p>The spec adopts the videoascode conventions so the same deck records and validates without changes:</p>
+<ul>
+<li>A slide is an element with class <code>slide</code> and a <code>data-id</code>, unique in the deck.</li>
+<li>A slide with <code>data-lesson</code> starts a lesson. The value is the title; when empty, the slide's <code>data-title</code> or ID is used.</li>
+<li>Slides before the first lesson start belong to the first lesson. A deck with no lesson starts is one lesson, with the section's ID.</li>
+<li>Narration in the default language comes from the deck: a slide's <code>data-vo</code>, or its <code>aside.notes</code> element. The deck is the only source for that language.</li>
+<li>The deck opens at the slide named by the URL fragment (<code>#&lt;data-id&gt;</code>).</li>
+<li>Narration may contain <code>[PAUSE:ms]</code> directives, which are timing for the recording tool and not part of the spoken text.</li>
+</ul>
+<p>A deck is self-contained: every file it loads (styles, scripts, fonts, images, media) is in the course directory or its theme, referenced by a relative path. Players that sandbox decks, and offline playback, block network requests, so a stylesheet from a CDN or a web font from a font service fails there. The validator checks that each relative reference resolves and warns about each remote one. Links a learner clicks (<code>&lt;a href&gt;</code>) are not loads and may point anywhere.</p>
+<p>Theme files: the deck references the course's <code>theme</code> directory with a relative path, which the validator checks resolves. Recording tools serve the nearest directory that contains both the course and its theme, not just the deck directory, so shared files don't need copying into every deck. This depends on support in the recording tool; see PLAN.</p>
+<h3 id="translations">Translations<a class="headerlink" href="#translations" title="Permanent link">&para;</a></h3>
+<p>Translations are in <code>deck/voiceover/transcript.json</code>, in the videoascode transcript format, defined by its JSON Schema (<code>pkg/transcript/transcript.schema.json</code> in videoascode). The file lists slides; each slide has its narration per language; each language has a list of segments, one per sentence. Translations are written by hand, so the file is committed source, not build output. Without it, the deck has only the default language.</p>
+<ul>
+<li>Each slide entry carries <code>id</code>, equal to the slide's <code>data-id</code>, and translations are matched to slides by <code>id</code>. The entry's <code>index</code> is informational. Matching by position would attach every later translation to the wrong slide after a slide is inserted or deleted, and nothing would report it.</li>
+<li>A transcript written before slide entries carried <code>id</code> is matched by position, with a warning to add the IDs.</li>
+<li>Default-language entries in the transcript are generated from the deck. Tools use the deck when the two differ, and the validator warns.</li>
+<li>Transcript <code>metadata</code>, such as the default voice, is a recording setting. course-spec doesn't read it.</li>
+</ul>
+<h3 id="content-fingerprint">Content Fingerprint<a class="headerlink" href="#content-fingerprint" title="Permanent link">&para;</a></h3>
+<p><code>deck</code> computes a fingerprint for each lesson, written <code>sha256:&lt;hex&gt;</code>. For each slide in the lesson, in order, it hashes:</p>
+<ol>
+<li>the slide's HTML, without the slide element's own <code>data-id</code>, so renaming a slide isn't a content change and a renamed lesson can be recognized by its unchanged fingerprint;</li>
+<li>for each language in the course's <code>languages</code>, sorted by code, the slide's narration: from the deck for the default language, from the transcript for the others, with the segment texts joined by single spaces. A language with no narration for the slide contributes empty text.</li>
+</ol>
+<p>Narration is normalized before hashing: <code>[PAUSE:ms]</code> directives are removed and runs of whitespace become one space. Each value is written with its length in bytes before it, so field boundaries can't shift between slides.</p>
+<p>Joining the segments means splitting the same sentences differently isn't a content change. Transcript <code>metadata</code> is never hashed. The fingerprint covers everything an author writes and nothing a recording tool chooses: the voice, pronunciations, timing, and resolution belong in the recording tool's own fingerprint.</p>
+<p>The fingerprint doesn't cover the theme's CSS, JavaScript, fonts, or images, so a theme change doesn't mark any lesson as changed. After changing a theme, re-record the affected lessons by ID, or all of them. A theme fingerprint in <code>published.json</code> can be added if this proves a problem.</p>
+<h2 id="pronunciations">Pronunciations<a class="headerlink" href="#pronunciations" title="Permanent link">&para;</a></h2>
+<p><code>pronunciations.json</code> maps a term to how TTS should say it, per language. It uses the videoascode pronunciation map:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;SaaS&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sass&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;OAuth&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oh auth&quot;</span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;API&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A P I&quot;</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Terms match case-insensitively at word boundaries. Only the TTS input changes; captions keep the written term.</p>
+<h2 id="quiz">Quiz<a class="headerlink" href="#quiz" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;designing-endpoints-quiz&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Designing Endpoints Quiz&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;passPercentage&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">70</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;allowRetry&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;maxAttempts&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;showFeedback&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;shuffleOptions&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;questions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;q1-idempotent-methods&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;multipleChoice&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lesson&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;methods&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Which methods are idempotent?&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;POST&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;correct&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">}</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;explanation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;GET and PUT can be repeated with the same result; POST can&#39;t.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;points&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;q2-404&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;trueFalse&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;A 404 means the server failed.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;correctAnswer&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;explanation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;404 means the resource wasn&#39;t found, a client-side condition.&quot;</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;q3-status-code&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shortAnswer&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;prompt&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Which status code means \&quot;Created\&quot;?&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;acceptedAnswers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;201&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;201 Created&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;explanation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;201 Created, with a Location header for the new resource.&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Question types are <code>multipleChoice</code>, <code>trueFalse</code>, and <code>shortAnswer</code>. A platform maps them to its own names on import.</li>
+<li><code>multipleChoice</code> needs at least two options with unique IDs and at least one correct. With more than one correct, the learner must choose exactly the correct set.</li>
+<li><code>trueFalse</code> needs a boolean <code>correctAnswer</code>.</li>
+<li><code>shortAnswer</code> needs one or more <code>acceptedAnswers</code>, compared ignoring case and repeated spaces.</li>
+<li><code>explanation</code> is required. Feedback without a reason doesn't teach.</li>
+<li><code>points</code> defaults to 1. <code>maxAttempts</code> of 0 means unlimited.</li>
+<li><code>lesson</code>, when set, must name a lesson in the course. A review quiz at the end of a course can point each question at the lesson it covers, in any section.</li>
+<li><code>shuffleOptions</code> (default false) asks the platform to shuffle multiple-choice options for each learner. Without it, options are shown in file order, so the validator warns when correct options keep landing in the same position.</li>
+</ul>
+<h2 id="published-state">Published State<a class="headerlink" href="#published-state" title="Permanent link">&para;</a></h2>
+<p><code>published.json</code> is written by tools after recording, uploading, or syncing. Authors don't edit it.</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;courseVersion&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1.2.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;lessons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;resources&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;contentFingerprint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:…&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;recordingFingerprint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;3f9a1c0b7d2e4a65&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;durationMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">151000</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;videos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;youtube&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;dQw4w9WgXcQ&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;captions&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;youtube&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;quizzes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;designing-endpoints-quiz&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;fingerprint&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:…&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;video&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;playlists&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;en-US&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;youtube&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;PL…&quot;</span><span class="p">}}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;platforms&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;academyos&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;baseUrl&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://app.academyos.io&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;courseId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;…&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lessons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;resources&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;…&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;quizzes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;designing-endpoints-quiz&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;…&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;revision&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>Keys are spec IDs. Platform IDs are values, so one course can be published to several platforms.</li>
+<li>A platform's <code>revision</code> is its revision of the course when this copy was last synced, so the platform can refuse a push from a stale copy.</li>
+<li><code>contentFingerprint</code> is the <code>deck</code> content fingerprint the video was made from. <code>coursespec lessons</code> compares it with the current content to report a lesson as <strong>changed</strong>, even after a fresh clone when <code>build/</code> is empty.</li>
+<li><code>recordingFingerprint</code> is the recording tool's own fingerprint, an opaque string in whatever format that tool uses. The <code>sha256:</code> form applies only to course-spec's content and quiz fingerprints. When only it differs (a new voice, say), the recording tool reports the lesson as needing a re-record; course-spec doesn't interpret it.</li>
+<li><code>quizzes[].fingerprint</code> hashes a quiz's questions and settings, so a changed quiz is noticed the same way.</li>
+<li>No secrets, tokens, or private URLs belong in this file.</li>
+</ul>
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">&para;</a></h2>
+<p><code>validate.Course(dir)</code> returns findings. Each finding has a severity (<code>error</code> or <code>warning</code>), the file, a JSON pointer or line, a message, and a fix. The CLI prints them and exits non-zero on any error.</p>
+<p>Checks:</p>
+<ol>
+<li>Each manifest matches the schema; unknown properties are errors, so typos aren't ignored.</li>
+<li>IDs: course, section, lesson, and quiz IDs are lowercase kebab-case. Lesson IDs are unique within the course; question IDs within their quiz.</li>
+<li>Every listed section directory exists and has a manifest, except unreleased sections; every directory under <code>sections/</code> is listed. Every section has a lesson or a quiz.</li>
+<li>Each source file exists; each HTML deck parses, its slide IDs are unique, and every <code>lessons[]</code> ID that isn't a text lesson is in the deck. Each relative file a deck loads exists.</li>
+<li>Quiz rules from the Quiz section.</li>
+<li>Every ID in <code>published.json</code> still exists or is marked <code>retired</code>. A published ID that disappeared is an error naming the likely rename.</li>
+<li>When a lesson's content fingerprint or a quiz's fingerprint differs from <code>published.json</code>, and <code>version</code> equals the published <code>courseVersion</code>, warn: content changed without a version bump.</li>
+<li>Referenced files (thumbnail, certificate template, text lessons, <code>pronunciations.json</code>, transcripts) exist. <code>theme</code> resolves inside the repository; a path that leaves it is an error.</li>
+<li>Transcripts: a slide <code>id</code> that isn't in the deck is an error; it catches a translation left behind by a renamed or deleted slide. A deck slide with no narration in a language listed in <code>languages</code> is a warning, because recording tools record a language only when every slide has it.</li>
+</ol>
+<p>Warnings that help authors and agents:</p>
+<ul>
+<li>Without <code>shuffleOptions</code>, three or more multiple-choice questions in a quiz whose correct options all sit at the same position.</li>
+<li>A slide with no narration (<code>data-vo</code> or <code>aside.notes</code>).</li>
+<li>A deck that loads a file from another host, which sandboxed and offline players block.</li>
+<li>A lesson whose narration runs over about 10 minutes, estimated at 150 words per minute.</li>
+<li>Narration containing characters TTS reads badly, such as <code>(</code>, <code>)</code>, <code>/</code>, or <code>→</code>. Off by default; enabled with <code>--strict-narration</code>.</li>
+</ul>
+<h2 id="json-schema">JSON Schema<a class="headerlink" href="#json-schema" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Generated from the Go types with <code>invopop/jsonschema</code> by a <code>//go:build ignore</code> generator, one file per document: <code>course.schema.json</code>, <code>section.schema.json</code>, <code>quiz.schema.json</code>, <code>published.schema.json</code>.</li>
+<li>Linted with <code>schemakit lint --property-case camelCase</code>.</li>
+<li><code>$id</code>: <code>https://academyos.io/schemas/course-spec/v1/&lt;name&gt;.schema.json</code>.</li>
+</ul>
+<h2 id="cli">CLI<a class="headerlink" href="#cli" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>coursespec validate &lt;dir&gt;            check a course; non-zero exit on errors
+coursespec lessons &lt;dir&gt;             list sections, lessons, quizzes, and publish status
+coursespec schema [name]             print an embedded schema
+</code></pre></div>
+<p><code>coursespec lessons</code> compares content fingerprints, so it doesn't see theme changes; see Content Fingerprint.</p>
+<p>Output is text by default and <code>--format json</code> for tools and agents.</p>
+<p>Given a directory without a course manifest, <code>validate</code> and <code>lessons</code> act on every course directory beneath it, skipping <code>.git</code>, <code>node_modules</code>, and <code>build/</code> directories.</p>
+<h2 id="academyos-course-sync">AcademyOS Course Sync<a class="headerlink" href="#academyos-course-sync" title="Permanent link">&para;</a></h2>
+<p>AcademyOS's GitHub sync currently reads its own snake_case course file, which lists lessons inline and leaves quizzes out. AcademyOS replaces that format with course-spec rather than supporting both: its sync loads a course directory with this module, and the old format is retired. No published course depends on it.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      MIT License
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.sections", "navigation.top", "content.code.copy", "search.highlight"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
