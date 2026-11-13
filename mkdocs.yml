@@ -35,6 +35,7 @@ nav:
       - Validation findings: reference/findings.md
       - JSON Schemas: reference/schemas.md
   - Releases:
+      - v0.2.0: releases/v0.2.0.md
       - v0.1.0: releases/v0.1.0.md
   - Specification:
       - Requirements: specs/initiatives/INIT-COURSESPEC-001/PRD.md

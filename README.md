@@ -1,6 +1,6 @@
 # course-spec
 
-![coverage](https://img.shields.io/badge/coverage-80.6%25-green)
+![coverage](https://img.shields.io/badge/coverage-81.8%25-green)
 
 An open format for keeping a complete online course in one directory under
 version control: the outline, HTML slide decks with narration, translations,
