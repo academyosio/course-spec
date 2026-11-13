@@ -9,6 +9,7 @@ Go types, which are the source of truth. Unknown properties are not allowed.
 | `section.json` | `schema/section.schema.json` | `https://academyos.io/schemas/course-spec/v1/section.schema.json` |
 | `quiz.json` | `schema/quiz.schema.json` | `https://academyos.io/schemas/course-spec/v1/quiz.schema.json` |
 | `published.json` | `schema/published.schema.json` | `https://academyos.io/schemas/course-spec/v1/published.schema.json` |
+| `recordings/recordings.json` | `schema/recordings.schema.json` | `https://academyos.io/schemas/course-spec/v1/recordings.schema.json` |
 
 Print one with `coursespec schema <name>`, or read it from Go with
 `schema.Get(name)`.

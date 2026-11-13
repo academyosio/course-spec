@@ -82,7 +82,7 @@ first when it reports a problem.
 ## `coursespec schema`
 
 ```bash
-coursespec schema           # list the schemas: course, published, quiz, section
+coursespec schema           # list the schemas: course, published, quiz, recordings, section
 coursespec schema quiz      # print one
 ```
 
