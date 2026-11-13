@@ -474,10 +474,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#narration-warnings" class="md-nav__link">
+  <a href="#recorded-narration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Narration warnings
+        Recorded narration
       
     </span>
   </a>
@@ -814,6 +814,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../releases/v0.1.0/" class="md-nav__link">
         
   
@@ -1095,10 +1123,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#narration-warnings" class="md-nav__link">
+  <a href="#recorded-narration" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Narration warnings
+        Recorded narration
       
     </span>
   </a>
@@ -1218,7 +1246,53 @@ language:</p>
 <p>Terms match case-insensitively at word boundaries; where terms overlap, the
 one with more words, then the longer one, wins. Only what is spoken changes:
 captions and transcripts keep the written term.</p>
-<h2 id="narration-warnings">Narration warnings<a class="headerlink" href="#narration-warnings" title="Permanent link">&para;</a></h2>
+<h2 id="recorded-narration">Recorded narration<a class="headerlink" href="#recorded-narration" title="Permanent link">&para;</a></h2>
+<p>A recording tool such as videoascode can record each lesson's narration
+with a synthesized voice. The recordings sit beside the deck, like its
+transcript:</p>
+<div class="highlight"><pre><span></span><code>deck/
+  index.html
+  voiceover/transcript.json
+  recordings/
+    recordings.json
+    en-US/lambo-welcome.mp3
+    en-US/lambo-welcome.vtt
+</code></pre></div>
+<p><code>recordings.json</code> has one entry per lesson and language:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;lessons&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;lesson&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lambo-welcome&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;language&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;audio&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US/lambo-welcome.mp3&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;captions&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;en-US/lambo-welcome.vtt&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;durationMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">31200</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;voice&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;provider&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;elevenlabs&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;voiceId&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;pNInz6obpgDQGcFmaJgB&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Adam&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="nt">&quot;slides&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lambo-welcome&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;startMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;durationMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9800</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;narration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:…&quot;</span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;lambo-sections&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;startMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9800</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;durationMs&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">21400</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;narration&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;sha256:…&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><code>lesson</code> is the lesson's ID, its first slide's <code>data-id</code>.</li>
+<li><code>audio</code> is an MP3 and <code>captions</code> an optional WebVTT file, both relative to
+  <code>recordings/</code>.</li>
+<li><code>slides</code> are the lesson's slides in order. Each starts where the one
+  before it ends, and <code>durationMs</code> covers the slide's speech and pause.</li>
+<li><code>narration</code> fingerprints the slide's narration as recorded: the deck's
+  text and pause for the course's default language, the transcript's text
+  for a translation. Library users compute it with
+  <code>deck.NarrationFingerprint</code>.</li>
+</ul>
+<p>A recording is <strong>current</strong> while every slide's narration matches and the
+lesson has the same slides in the same order. Editing a slide's narration
+or pause, or adding, removing or reordering slides, makes it <strong>stale</strong>;
+restyling a slide doesn't. <code>coursespec lessons</code> shows each lesson's
+recording status per language, <code>coursespec validate</code> warns about stale
+recordings, and players use the recording only while it is current.</p>
 <ul>
 <li>A slide without narration.</li>
 <li>A lesson whose narration runs over about 10 minutes, at 150 words per

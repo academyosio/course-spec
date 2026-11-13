@@ -614,6 +614,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recordings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recordings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#schemas" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -806,6 +817,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1095,6 +1134,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recordings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recordings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#schemas" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1207,6 +1257,20 @@ and title.</p>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
+<h2 id="recordings">Recordings<a class="headerlink" href="#recordings" title="Permanent link">&para;</a></h2>
+<p>A deck's recorded narration is in <code>recordings/recordings.json</code> beside it.
+<code>CheckRecording</code> tells whether a lesson's recording still matches its
+narration:</p>
+<div class="highlight"><pre><span></span><code><span class="nx">r</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">deck</span><span class="p">.</span><span class="nx">ReadRecordings</span><span class="p">(</span><span class="s">&quot;deck/recordings/recordings.json&quot;</span><span class="p">)</span>
+<span class="nx">l</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">d</span><span class="p">.</span><span class="nx">Lessons</span><span class="p">(</span><span class="s">&quot;section-id&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nx">check</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">l</span><span class="p">.</span><span class="nx">CheckRecording</span><span class="p">(</span><span class="nx">r</span><span class="p">.</span><span class="nx">Find</span><span class="p">(</span><span class="nx">l</span><span class="p">.</span><span class="nx">ID</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;en-US&quot;</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;en-US&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">nil</span><span class="p">)</span><span class="w"> </span><span class="c1">// translations for other languages</span>
+<span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">check</span><span class="p">.</span><span class="nx">Status</span><span class="p">,</span><span class="w"> </span><span class="nx">check</span><span class="p">.</span><span class="nx">StaleSlides</span><span class="p">)</span><span class="w">                    </span><span class="c1">// current, stale or missing</span>
+</code></pre></div>
+<p>A recording tool writes an entry with each slide's <code>deck.NarrationFingerprint</code>,
+from <code>l.SlideNarration(lang, defaultLang, translations)</code>, and saves the file
+with <code>r.Set(entry)</code> and <code>r.Write(path)</code>. A loaded course has them as
+<code>Section.Recordings</code>, and <code>c.Status()</code> reports each lesson's recording status
+per language.</p>
 <h2 id="schemas">Schemas<a class="headerlink" href="#schemas" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="s">&quot;github.com/academyosio/course-spec/schema&quot;</span>
 

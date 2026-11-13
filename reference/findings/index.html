@@ -690,6 +690,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#recordings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recordings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quizzes" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -806,6 +817,34 @@
 
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../releases/v0.2.0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    v0.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -1077,6 +1116,17 @@
     <span class="md-ellipsis">
       
         Decks and narration
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recordings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recordings
       
     </span>
   </a>
@@ -1378,6 +1428,48 @@ invalid; warnings don't. Each finding also carries its own fix.</p>
 <td><code>missing-translation</code></td>
 <td>warning</td>
 <td>Slides without narration in one of the course's languages, or no transcript at all</td>
+</tr>
+</tbody>
+</table>
+<h2 id="recordings">Recordings<a class="headerlink" href="#recordings" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Severity</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>unknown-lesson</code></td>
+<td>error</td>
+<td>A recording names a lesson that isn't in the deck</td>
+</tr>
+<tr>
+<td><code>recording-language</code></td>
+<td>error</td>
+<td>A recording's language isn't one of the course's languages</td>
+</tr>
+<tr>
+<td><code>duplicate-recording</code></td>
+<td>error</td>
+<td>A lesson is recorded twice in one language</td>
+</tr>
+<tr>
+<td><code>invalid-recording</code></td>
+<td>error</td>
+<td>A recording's audio or captions path leaves <code>recordings/</code> or has the wrong type, or its slide timings don't tile the audio</td>
+</tr>
+<tr>
+<td><code>missing-file</code></td>
+<td>error</td>
+<td>A recording's audio or captions file doesn't exist</td>
+</tr>
+<tr>
+<td><code>stale-recording</code></td>
+<td>warning</td>
+<td>The lesson's narration changed after it was recorded, or its slides changed</td>
 </tr>
 </tbody>
 </table>
