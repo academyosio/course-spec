@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://academyos.io/schemas/course-spec/v1/recordings.schema.json",
+  "$defs": {
+    "LessonRecording": {
+      "properties": {
+        "lesson": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Lesson is the lesson's ID: its first slide's data-id."
+        },
+        "language": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Language is the narration's BCP-47 language."
+        },
+        "audio": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Audio is the MP3 file, relative to the recordings directory."
+        },
+        "captions": {
+          "type": "string",
+          "description": "Captions is a WebVTT file, relative to the recordings directory."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "DurationMs is the audio's length."
+        },
+        "voice": {
+          "$ref": "#/$defs/RecordingVoice",
+          "description": "Voice is the voice it was recorded with."
+        },
+        "slides": {
+          "items": {
+            "$ref": "#/$defs/RecordedSlide"
+          },
+          "type": "array",
+          "minItems": 1,
+          "description": "Slides are the lesson's slides in order, with where each one's\nnarration starts in the audio."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "lesson",
+        "language",
+        "audio",
+        "durationMs",
+        "slides"
+      ],
+      "description": "LessonRecording is one lesson's narration recorded in one language."
+    },
+    "RecordedSlide": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID is the slide's data-id."
+        },
+        "startMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "StartMs is where the slide's narration starts in the audio."
+        },
+        "durationMs": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "DurationMs covers the slide's speech and its pause."
+        },
+        "narration": {
+          "type": "string",
+          "description": "Narration is the NarrationFingerprint of the narration recorded."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "required": [
+        "id",
+        "startMs",
+        "durationMs",
+        "narration"
+      ],
+      "description": "RecordedSlide is one slide's place in a lesson recording."
+    },
+    "RecordingVoice": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Provider is the TTS provider, such as elevenlabs."
+        },
+        "voiceId": {
+          "type": "string",
+          "description": "VoiceID is the provider's voice ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name is the voice's display name."
+        },
+        "model": {
+          "type": "string",
+          "description": "Model is the provider's model."
+        }
+      },
+      "additionalProperties": false,
+      "type": "object",
+      "description": "RecordingVoice describes the voice a recording was made with."
+    }
+  },
+  "properties": {
+    "lessons": {
+      "items": {
+        "$ref": "#/$defs/LessonRecording"
+      },
+      "type": "array",
+      "description": "Lessons has one entry per lesson and language."
+    }
+  },
+  "additionalProperties": false,
+  "type": "object",
+  "required": [
+    "lessons"
+  ],
+  "title": "course-spec deck recordings",
+  "description": "Recordings is a deck's recorded narration: recordings/recordings.json."
+}

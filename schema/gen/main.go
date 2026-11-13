@@ -13,6 +13,7 @@ import (
 	"github.com/invopop/jsonschema"
 
 	coursespec "github.com/academyosio/course-spec"
+	"github.com/academyosio/course-spec/deck"
 )
 
 const baseID = "https://academyos.io/schemas/course-spec/v1/"
@@ -27,6 +28,7 @@ func main() {
 		{"section", "course-spec section manifest", &coursespec.SectionManifest{}},
 		{"quiz", "course-spec quiz", &coursespec.Quiz{}},
 		{"published", "course-spec published state", &coursespec.Published{}},
+		{"recordings", "course-spec deck recordings", &deck.Recordings{}},
 	}
 	for _, d := range docs {
 		r := &jsonschema.Reflector{ExpandedStruct: true}
