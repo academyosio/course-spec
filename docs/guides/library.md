@@ -82,6 +82,25 @@ for _, r := range d.Refs {
 }
 ```
 
+## Recordings
+
+A deck's recorded narration is in `recordings/recordings.json` beside it.
+`CheckRecording` tells whether a lesson's recording still matches its
+narration:
+
+```go
+r, err := deck.ReadRecordings("deck/recordings/recordings.json")
+l := d.Lessons("section-id")[0]
+check := l.CheckRecording(r.Find(l.ID, "en-US"), "en-US", nil) // translations for other languages
+fmt.Println(check.Status, check.StaleSlides)                    // current, stale or missing
+```
+
+A recording tool writes an entry with each slide's `deck.NarrationFingerprint`,
+from `l.SlideNarration(lang, defaultLang, translations)`, and saves the file
+with `r.Set(entry)` and `r.Write(path)`. A loaded course has them as
+`Section.Recordings`, and `c.Status()` reports each lesson's recording status
+per language.
+
 ## Schemas
 
 ```go

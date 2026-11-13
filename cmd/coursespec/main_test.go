@@ -86,7 +86,7 @@ func TestLessonsInvalidCourse(t *testing.T) {
 
 func TestSchema(t *testing.T) {
 	out, err := run(t, "schema")
-	if err != nil || out != "course\npublished\nquiz\nsection\n" {
+	if err != nil || out != "course\npublished\nquiz\nrecordings\nsection\n" {
 		t.Fatalf("out = %q, err = %v", out, err)
 	}
 	out, err = run(t, "schema", "quiz")

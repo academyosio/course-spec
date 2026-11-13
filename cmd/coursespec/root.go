@@ -5,8 +5,10 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"maps"
 	"os"
 	"path/filepath"
+	"slices"
 	"strings"
 
 	"github.com/spf13/cobra"
@@ -168,6 +170,13 @@ func printReport(w io.Writer, r coursespec.Report) {
 			extra := l.Type
 			if l.Slides > 0 {
 				extra = fmt.Sprintf("%d slides", l.Slides)
+			}
+			if len(l.Recordings) > 0 {
+				var recs []string
+				for _, lang := range slices.Sorted(maps.Keys(l.Recordings)) {
+					recs = append(recs, lang+" "+l.Recordings[lang])
+				}
+				extra += "; recording: " + strings.Join(recs, ", ")
 			}
 			fmt.Fprintf(w, "    %-10s %s: %s (%s)\n", l.Status, l.ID, l.Title, extra)
 		}

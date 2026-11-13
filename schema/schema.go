@@ -14,7 +14,8 @@ import (
 //go:embed *.schema.json
 var files embed.FS
 
-// Names returns the schema names: course, published, quiz, section.
+// Names returns the schema names: course, published, quiz, recordings,
+// section.
 func Names() []string {
 	entries, err := files.ReadDir(".")
 	if err != nil {

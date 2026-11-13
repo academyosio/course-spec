@@ -9,11 +9,12 @@ import (
 	"github.com/invopop/jsonschema"
 
 	coursespec "github.com/academyosio/course-spec"
+	"github.com/academyosio/course-spec/deck"
 	"github.com/academyosio/course-spec/schema"
 )
 
 func TestNamesAndGet(t *testing.T) {
-	if got := strings.Join(schema.Names(), ","); got != "course,published,quiz,section" {
+	if got := strings.Join(schema.Names(), ","); got != "course,published,quiz,recordings,section" {
 		t.Fatalf("names = %s", got)
 	}
 	for _, n := range schema.Names() {
@@ -40,10 +41,11 @@ func TestNamesAndGet(t *testing.T) {
 // schemas: run go generate ./schema.
 func TestUpToDate(t *testing.T) {
 	types := map[string]any{
-		"course":    &coursespec.CourseManifest{},
-		"section":   &coursespec.SectionManifest{},
-		"quiz":      &coursespec.Quiz{},
-		"published": &coursespec.Published{},
+		"course":     &coursespec.CourseManifest{},
+		"section":    &coursespec.SectionManifest{},
+		"quiz":       &coursespec.Quiz{},
+		"published":  &coursespec.Published{},
+		"recordings": &deck.Recordings{},
 	}
 	embeddedFiles := map[string][]byte{}
 	for name := range types {

@@ -108,7 +108,60 @@ Terms match case-insensitively at word boundaries; where terms overlap, the
 one with more words, then the longer one, wins. Only what is spoken changes:
 captions and transcripts keep the written term.
 
-## Narration warnings
+## Recorded narration
+
+A recording tool such as videoascode can record each lesson's narration
+with a synthesized voice. The recordings sit beside the deck, like its
+transcript:
+
+```text
+deck/
+  index.html
+  voiceover/transcript.json
+  recordings/
+    recordings.json
+    en-US/lambo-welcome.mp3
+    en-US/lambo-welcome.vtt
+```
+
+`recordings.json` has one entry per lesson and language:
+
+```json
+{
+  "lessons": [
+    {
+      "lesson": "lambo-welcome",
+      "language": "en-US",
+      "audio": "en-US/lambo-welcome.mp3",
+      "captions": "en-US/lambo-welcome.vtt",
+      "durationMs": 31200,
+      "voice": {"provider": "elevenlabs", "voiceId": "pNInz6obpgDQGcFmaJgB", "name": "Adam"},
+      "slides": [
+        {"id": "lambo-welcome", "startMs": 0, "durationMs": 9800, "narration": "sha256:…"},
+        {"id": "lambo-sections", "startMs": 9800, "durationMs": 21400, "narration": "sha256:…"}
+      ]
+    }
+  ]
+}
+```
+
+- `lesson` is the lesson's ID, its first slide's `data-id`.
+- `audio` is an MP3 and `captions` an optional WebVTT file, both relative to
+  `recordings/`.
+- `slides` are the lesson's slides in order. Each starts where the one
+  before it ends, and `durationMs` covers the slide's speech and pause.
+- `narration` fingerprints the slide's narration as recorded: the deck's
+  text and pause for the course's default language, the transcript's text
+  for a translation. Library users compute it with
+  `deck.NarrationFingerprint`.
+
+A recording is **current** while every slide's narration matches and the
+lesson has the same slides in the same order. Editing a slide's narration
+or pause, or adding, removing or reordering slides, makes it **stale**;
+restyling a slide doesn't. `coursespec lessons` shows each lesson's
+recording status per language, `coursespec validate` warns about stale
+recordings, and players use the recording only while it is current.
+
 
 - A slide without narration.
 - A lesson whose narration runs over about 10 minutes, at 150 words per

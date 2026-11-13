@@ -33,7 +33,9 @@ type Section struct {
 	Deck *deck.Deck
 	// Translations are the transcript's narration by slide and language.
 	Translations deck.Narration
-	Lessons      []Lesson
+	// Recordings is the deck's recorded narration; nil when it has none.
+	Recordings *deck.Recordings
+	Lessons    []Lesson
 	// Quiz is nil when the section has none.
 	Quiz *Quiz
 }
@@ -121,6 +123,11 @@ func LoadSection(courseDir string, ref SectionRef, cm *CourseManifest) (*Section
 			}
 			s.Translations = n
 		}
+		r, err := readOptional(filepath.Join(filepath.Dir(deckPath), filepath.FromSlash(deck.RecordingsFile)), deck.ReadRecordings)
+		if err != nil {
+			return nil, err
+		}
+		s.Recordings = r
 	}
 	lessons, problems := ResolveLessons(sm, s.Deck)
 	if len(problems) > 0 {

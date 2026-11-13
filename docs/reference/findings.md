@@ -64,6 +64,17 @@ invalid; warnings don't. Each finding also carries its own fix.
 | `transcript-differs` | warning | The transcript's default-language narration differs from the deck |
 | `missing-translation` | warning | Slides without narration in one of the course's languages, or no transcript at all |
 
+## Recordings
+
+| Code | Severity | Meaning |
+| --- | --- | --- |
+| `unknown-lesson` | error | A recording names a lesson that isn't in the deck |
+| `recording-language` | error | A recording's language isn't one of the course's languages |
+| `duplicate-recording` | error | A lesson is recorded twice in one language |
+| `invalid-recording` | error | A recording's audio or captions path leaves `recordings/` or has the wrong type, or its slide timings don't tile the audio |
+| `missing-file` | error | A recording's audio or captions file doesn't exist |
+| `stale-recording` | warning | The lesson's narration changed after it was recorded, or its slides changed |
+
 ## Quizzes
 
 | Code | Severity | Meaning |

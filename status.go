@@ -1,5 +1,7 @@
 package coursespec
 
+import "github.com/academyosio/course-spec/deck"
+
 // Publish status of a lesson or quiz, compared with published.json.
 const (
 	StatusNew       = "new"       // never published
@@ -35,6 +37,10 @@ type LessonReport struct {
 	Slides      int    `json:"slides,omitempty"`
 	Status      string `json:"status"`
 	Fingerprint string `json:"fingerprint,omitempty"`
+	// Recordings is each course language's recording status for a deck
+	// lesson: current, stale or missing. Empty when the section has no
+	// recordings at all.
+	Recordings map[string]string `json:"recordings,omitempty"`
 }
 
 // QuizReport is a section's quiz in a Report.
@@ -72,6 +78,9 @@ func (c *Course) Status() Report {
 			default:
 				lr.Status = StatusPublished
 			}
+			if s.Recordings != nil && l.Discovered {
+				lr.Recordings = c.recordingStatus(s, l)
+			}
 			sr.Lessons = append(sr.Lessons, lr)
 		}
 		if s.Quiz != nil {
@@ -92,4 +101,16 @@ func (c *Course) Status() Report {
 		r.Sections = append(r.Sections, sr)
 	}
 	return r
+}
+
+// recordingStatus checks a deck lesson's recording in each course language.
+func (c *Course) recordingStatus(s Section, l Lesson) map[string]string {
+	langs := c.Manifest.AllLanguages()
+	def := c.Manifest.DefaultLanguage()
+	dl := deck.Lesson{ID: l.ID, Title: l.Title, Slides: l.Slides}
+	out := make(map[string]string, len(langs))
+	for _, lang := range langs {
+		out[lang] = dl.CheckRecording(s.Recordings.Find(l.ID, lang), def, s.Translations).Status
+	}
+	return out
 }

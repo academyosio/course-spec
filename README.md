@@ -1,6 +1,6 @@
 # course-spec
 
-![coverage](https://img.shields.io/badge/coverage-80.6%25-green)
+![coverage](https://img.shields.io/badge/coverage-81.8%25-green)
 
 An open format for keeping a complete online course in one directory under
 version control: the outline, HTML slide decks with narration, translations,
@@ -22,7 +22,7 @@ go install github.com/academyosio/course-spec/cmd/coursespec@latest
 ```bash
 coursespec validate <dir>      # check a course; exits non-zero on errors
 coursespec lessons <dir>       # list sections, lessons, and quizzes with publish status
-coursespec schema [name]       # print a JSON Schema: course, section, quiz, published
+coursespec schema [name]       # print a JSON Schema: course, section, quiz, published, recordings
 ```
 
 Given a directory without a `course.json`, `validate` and `lessons` act on
@@ -48,6 +48,7 @@ error: sections/01-designing-endpoints/section.json /lessons/2/id: lesson "pagin
       section.json               section manifest
       deck/index.html            slides with narration
       deck/voiceover/transcript.json   translations (optional)
+      deck/recordings/           recorded narration per lesson and language (optional)
       quiz.json                  quiz with answer key (optional)
 ```
 
@@ -73,6 +74,15 @@ videoascode transcript format. Each slide entry carries `id`, the slide's
 `data-id`, so translations stay with their slides when slides are added or
 removed.
 
+### Recorded Narration
+
+A recording tool such as videoascode can store each lesson's synthesized
+narration in `deck/recordings/`: an MP3 and WebVTT captions per lesson and
+language, and `recordings.json` with where each slide starts in the audio
+and a fingerprint of the narration it was recorded from. Players use a
+recording only while it matches; `coursespec lessons` shows each lesson's
+recording status, and `coursespec validate` warns about stale ones.
+
 ### Published State and Fingerprints
 
 Tools write `published.json` after recording or importing a course. For each
@@ -91,7 +101,7 @@ report := c.Status()                                       // lessons and quizze
 | Package | Purpose |
 | --- | --- |
 | `coursespec` | Types for every file, `Load`, `Find`, and publish status |
-| `deck` | Slides, lessons, transcripts, and content fingerprints from HTML decks |
+| `deck` | Slides, lessons, transcripts, recordings, and content fingerprints from HTML decks |
 | `validate` | Every check, as findings with a fix |
 | `schema` | The generated JSON Schemas, embedded |
 
