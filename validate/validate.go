@@ -478,6 +478,67 @@ func (c *checker) checkDeck(s *section, sf string) {
 		}
 	}
 	c.checkTranscript(s, d, filepath.Join(filepath.Dir(dpath), coursespec.TranscriptFile))
+	c.checkRecordings(s, d, filepath.Dir(dpath))
+}
+
+// checkRecordings checks the deck's recordings: each names a lesson in the
+// deck and a course language, its files exist inside recordings/, its
+// slide timings tile the audio, and it matches the lesson's narration.
+func (c *checker) checkRecordings(s *section, d *deck.Deck, deckDir string) {
+	rpath := filepath.Join(deckDir, filepath.FromSlash(deck.RecordingsFile))
+	if !c.exists(rpath) {
+		return
+	}
+	rf := c.rel(rpath)
+	r, err := deck.ReadRecordings(rpath)
+	if err != nil {
+		c.add(Error, "invalid-json", rf, "", err.Error(), "correct the JSON")
+		return
+	}
+	lessons := map[string]deck.Lesson{}
+	for _, l := range d.Lessons(s.manifest.ID) {
+		lessons[l.ID] = l
+	}
+	langs := c.manifest.AllLanguages()
+	def := c.manifest.DefaultLanguage()
+	seen := map[string]bool{}
+	dir := filepath.Join(deckDir, deck.RecordingsDir)
+	for i, rec := range r.Lessons {
+		ptr := fmt.Sprintf("/lessons/%d", i)
+		key := rec.Lesson + " " + rec.Language
+		if seen[key] {
+			c.add(Error, "duplicate-recording", rf, ptr, fmt.Sprintf("lesson %q is recorded twice in %s", rec.Lesson, rec.Language), "keep one entry per lesson and language")
+		}
+		seen[key] = true
+		l, ok := lessons[rec.Lesson]
+		if !ok {
+			c.add(Error, "unknown-lesson", rf, ptr+"/lesson", fmt.Sprintf("lesson %q is not in the deck", rec.Lesson), "remove the entry, or record the lesson again under its current ID")
+			continue
+		}
+		if !slices.Contains(langs, rec.Language) {
+			c.add(Error, "recording-language", rf, ptr+"/language", fmt.Sprintf("language %q is not in the course's languages", rec.Language), "add it to \"languages\" or remove the entry")
+			continue
+		}
+		if err := rec.CheckPaths(); err != nil {
+			c.add(Error, "invalid-recording", rf, ptr, err.Error(), "record the lesson again")
+			continue
+		}
+		for _, f := range []struct{ name, path string }{{"audio", rec.Audio}, {"captions", rec.Captions}} {
+			if f.path != "" && !c.exists(filepath.Join(dir, filepath.FromSlash(f.path))) {
+				c.add(Error, "missing-file", rf, ptr+"/"+f.name, fmt.Sprintf("%s file %q does not exist", f.name, f.path), "add the file under recordings/, or record the lesson again")
+			}
+		}
+		if ck := l.CheckRecording(&r.Lessons[i], def, s.translations); ck.Status != deck.RecordingCurrent {
+			changed := append(append([]string(nil), ck.StaleSlides...), ck.Removed...)
+			msg := fmt.Sprintf("the %s recording of lesson %q is out of date", rec.Language, rec.Lesson)
+			if len(changed) > 0 {
+				msg += ": slides " + strings.Join(changed, ", ") + " changed"
+			} else {
+				msg += ": its slides were reordered"
+			}
+			c.add(Warning, "stale-recording", rf, ptr, msg, "record the lesson again; players use the browser voice until then")
+		}
+	}
 }
 
 func (c *checker) checkTranscript(s *section, d *deck.Deck, tpath string) {
