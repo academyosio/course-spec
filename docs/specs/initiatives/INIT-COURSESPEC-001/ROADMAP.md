@@ -44,3 +44,13 @@ commits implementing one carry the trailer `Refs: RMI-COURSESPEC-<NNN>`.
 - [ ] `RMI-COURSESPEC-015` Course-level final exam
 - [ ] `RMI-COURSESPEC-016` Program manifest grouping courses into learning paths with a program certificate
 - [ ] `RMI-COURSESPEC-017` Practice quizzes: a quiz `practice` flag, so only other quizzes count toward `allQuizzes` certificates
+
+## Phase 4 — Recorded Narration
+
+**Theme:** A lesson's recorded narration travels with the course, and players know when it is out of date.
+
+- [x] `RMI-COURSESPEC-020` `recordings/recordings.json` beside a deck: types, reading and writing, and the JSON Schema
+- [x] `RMI-COURSESPEC-021` Narration fingerprints and `CheckRecording`: current, stale or missing, with the stale slides
+  - Depends on: `RMI-COURSESPEC-020`
+- [x] `RMI-COURSESPEC-022` Load, validate and report recordings: paths, timings, languages, and each lesson's status
+  - Depends on: `RMI-COURSESPEC-021`
